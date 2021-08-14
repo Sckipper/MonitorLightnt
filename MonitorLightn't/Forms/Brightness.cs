@@ -185,7 +185,13 @@ namespace MonitorLightnt
 
             try
             {
-                SetBrightness(GetBrightness());
+                int brightness = -1;
+                while (brightness < 0)
+                {
+                    brightness = GetBrightness();
+                }
+                
+                SetBrightness(brightness);
             }
             catch (Exception ex)
             {
@@ -281,15 +287,14 @@ namespace MonitorLightnt
 
         void SetContrast(byte value) //TODO
         {
-            //riScreen.SetContrast(value);
+            riScreen.SetContrast(value);
             ContrastSlider.Value = value;
             ContrastSlider.Text = ContrastSlider.Value.ToString();
         }
 
         byte GetContrast() //TODO
         {
-            // return (byte) riScreen.GetContrast();
-            return 100;
+            return (byte) riScreen.GetContrast();
         }
 
         void KeysDown(object sender, KeyEventArgs e)

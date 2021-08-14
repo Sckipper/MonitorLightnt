@@ -1,8 +1,14 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Win10_BrightnessSlider.wmiMonFn
-// Assembly: Win10_BrightnessSlider, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null
-// MVID: 271A8139-F024-4787-8802-FC5911CE41C9
-// Assembly location: C:\Users\Sckipper\Downloads\Win10_BrightnessSlider(1).exe
+﻿/* 
+    The Commons Clause source-available License  (https://commonsclause.com/)
+ 
+    All Rights Reserved.  blackholeearth (https://github.com/blackholeearth)
+    Intellectual Property.
+
+    you are Free To Download And use On your Pc
+    you are Free To View Code and See How its Done.
+
+    You Cant Sell This. 
+*/
 
 using System;
 using System.Collections.Generic;
