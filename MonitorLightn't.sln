@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorLightn't", "DimWin\MonitorLightn't.csproj", "{E41FB37D-D314-4259-AD12-54DCF30C60ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorLightn't", "MonitorLightn't\MonitorLightn't.csproj", "{E41FB37D-D314-4259-AD12-54DCF30C60ED}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{B4F8CCDE-DE11-47DC-99ED-615EAEF47E6E}"
 EndProject
