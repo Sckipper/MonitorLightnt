@@ -6,7 +6,7 @@ This project is a combination of DimWin-Brightness (https://github.com/reblGreen
 Developing monitor is a Samsung LC27G55TQWRXEN
 
 
-## ScreenShot ##
+## Screenshot ##
 ![alt text](https://i.ibb.co/5xtfk2h/Print.png)
 
 
