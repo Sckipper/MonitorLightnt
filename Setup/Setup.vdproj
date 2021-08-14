@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2DBFDE1B1574CCFBC23D16D0E681E31"
+        "MsmKey" = "8:_B45CAC5304A1400E86D2C89E3D159058"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -49,6 +49,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -65,6 +81,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -94,9 +118,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2DBFDE1B1574CCFBC23D16D0E681E31"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B45CAC5304A1400E86D2C89E3D159058"
             {
-            "SourcePath" = "8:..\\DimWin\\Resources\\monitor-icon_2.ico"
+            "SourcePath" = "8:..\\MonitorLightn't\\Resources\\monitor-icon_2.ico"
             "TargetName" = "8:monitor-icon_2.ico"
             "Tag" = "8:"
             "Folder" = "8:_C3BA05D0AAA94A099142E5B5CD74CFF1"
@@ -188,7 +212,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Samsung Monitor Control"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_A2DBFDE1B1574CCFBC23D16D0E681E31"
+        "ARPPRODUCTICON" = "8:_B45CAC5304A1400E86D2C89E3D159058"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -706,7 +730,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3083BAB9BB7E4CB99B28A223FFD1F189"
             {
-            "SourcePath" = "8:..\\DimWin\\obj\\Debug\\DimWin Brightness.exe"
+            "SourcePath" = "8:..\\MonitorLightn't\\obj\\Debug\\MonitorLightn't.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C3BA05D0AAA94A099142E5B5CD74CFF1"
