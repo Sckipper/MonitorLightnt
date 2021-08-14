@@ -138,7 +138,6 @@
             this.ContrastSlider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ContrastSlider.Location = new System.Drawing.Point(75, 143);
             this.ContrastSlider.Maximum = 100;
-            this.ContrastSlider.Minimum = 1;
             this.ContrastSlider.Name = "ContrastSlider";
             this.ContrastSlider.Size = new System.Drawing.Size(230, 45);
             this.ContrastSlider.TabIndex = 7;

@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BasicWindow.cs" />
-    <Compile Include="Classes\Screen\BrightnessInfo.cs" />
+    <Compile Include="Classes\Screen\MonitorInfo.cs" />
     <Compile Include="Classes\Screen\DxvaMonFn.cs" />
     <Compile Include="Classes\Screen\RichInfoScreen.cs" />
     <Compile Include="Classes\Screen\RicInfoScreenHolder.cs" />

@@ -94,6 +94,8 @@ namespace MonitorLightnt
             OverlaySlider.MouseUp += OverlaySliderChangeValue;
             BrightnessSlider.ValueChanged += BrightnessSliderValueChanged;
             BrightnessSlider.MouseUp += BrightnessSliderChangeValue;
+            ContrastSlider.ValueChanged += ContrastSliderValueChanged;
+            ContrastSlider.MouseUp += ContrastSliderChangeValue;
 
             StartPosition = FormStartPosition.Manual;
             SetLocation();
@@ -206,7 +208,7 @@ namespace MonitorLightnt
             catch (Exception ex)
             {
                 ContrastSlider.Value = ContrastSlider.Maximum;
-                ContrastSlider.Text = ContrastSlider.Maximum.ToString();
+                ContrastValue.Text = ContrastSlider.Maximum.ToString();
             }
         }
 
@@ -282,19 +284,37 @@ namespace MonitorLightnt
         }
         int GetBrightness()
         {
-            return riScreen.GetBrightness();
+            int brightness = riScreen.GetBrightness();
+            byte value = (byte)Math.Min(Math.Max(brightness, BrightnessSlider.Minimum), BrightnessSlider.Maximum);
+            return value;
         }
 
-        void SetContrast(byte value) //TODO
+        void ContrastSliderValueChanged(object sender, EventArgs e)
         {
-            riScreen.SetContrast(value);
-            ContrastSlider.Value = value;
-            ContrastSlider.Text = ContrastSlider.Value.ToString();
+            ContrastValue.Text = ContrastSlider.Value.ToString();
         }
 
-        byte GetContrast() //TODO
+        void ContrastSliderChangeValue(object sender, EventArgs e)
         {
-            return (byte) riScreen.GetContrast();
+            int contrast = ContrastSlider.Value;
+            SetContrast(contrast);
+            ContrastValue.Text = ContrastSlider.Value.ToString();
+        }
+
+        void SetContrast(int value) //TODO
+        {
+            byte contrast = (byte)Math.Min(Math.Max(value, ContrastSlider.Minimum), ContrastSlider.Maximum);
+
+            riScreen.SetContrast(contrast);
+            ContrastSlider.Value = contrast;
+            ContrastValue.Text = ContrastSlider.Value.ToString();
+        }
+
+        byte GetContrast()
+        {
+            int contrast = riScreen.GetContrast();
+            byte value = (byte) Math.Min(Math.Max(contrast, ContrastSlider.Minimum), ContrastSlider.Maximum);
+            return value;
         }
 
         void KeysDown(object sender, KeyEventArgs e)
