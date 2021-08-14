@@ -1,4 +1,4 @@
-﻿namespace DimWin
+﻿namespace MonitorLightnt
 {
     partial class Brightness
     {
@@ -37,9 +37,9 @@
             this.ContrastImage = new System.Windows.Forms.PictureBox();
             this.BrightnessImage = new System.Windows.Forms.PictureBox();
             this.OverlayImage = new System.Windows.Forms.PictureBox();
-            this.ConstrastSlider = new DimWin.NoFocusSlider();
-            this.BrightnessSlider = new DimWin.NoFocusSlider();
-            this.OverlaySlider = new DimWin.NoFocusSlider();
+            this.ConstrastSlider = new MonitorLightnt.NoFocusSlider();
+            this.BrightnessSlider = new MonitorLightnt.NoFocusSlider();
+            this.OverlaySlider = new MonitorLightnt.NoFocusSlider();
             ((System.ComponentModel.ISupportInitialize)(this.ContrastImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BrightnessImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayImage)).BeginInit();
@@ -79,7 +79,7 @@
             this.BrightnessLabel.Name = "BrightnessLabel";
             this.BrightnessLabel.Size = new System.Drawing.Size(223, 13);
             this.BrightnessLabel.TabIndex = 6;
-            this.BrightnessLabel.Text = "0              25             50            75             100";
+            this.BrightnessLabel.Text = "0              25             50             75            100";
             // 
             // ContrastLabel
             // 
@@ -90,7 +90,7 @@
             this.ContrastLabel.Name = "ContrastLabel";
             this.ContrastLabel.Size = new System.Drawing.Size(223, 13);
             this.ContrastLabel.TabIndex = 10;
-            this.ContrastLabel.Text = "0              25             50            75             100";
+            this.ContrastLabel.Text = "0              25             50             75            100";
             // 
             // ContrastValue
             // 
@@ -105,7 +105,7 @@
             // 
             // ContrastImage
             // 
-            this.ContrastImage.Image = global::DimWin.Properties.Resources.contrast_31;
+            this.ContrastImage.Image = global::MonitorLightnt.Properties.Resources.contrast_31;
             this.ContrastImage.Location = new System.Drawing.Point(23, 140);
             this.ContrastImage.Name = "ContrastImage";
             this.ContrastImage.Size = new System.Drawing.Size(30, 30);
@@ -115,7 +115,7 @@
             // 
             // BrightnessImage
             // 
-            this.BrightnessImage.Image = global::DimWin.Properties.Resources.brightness_2;
+            this.BrightnessImage.Image = global::MonitorLightnt.Properties.Resources.brightness_2;
             this.BrightnessImage.Location = new System.Drawing.Point(23, 80);
             this.BrightnessImage.Name = "BrightnessImage";
             this.BrightnessImage.Size = new System.Drawing.Size(30, 30);
@@ -125,7 +125,7 @@
             // 
             // OverlayImage
             // 
-            this.OverlayImage.Image = global::DimWin.Properties.Resources.contrast;
+            this.OverlayImage.Image = global::MonitorLightnt.Properties.Resources.contrast;
             this.OverlayImage.Location = new System.Drawing.Point(23, 27);
             this.OverlayImage.Name = "OverlayImage";
             this.OverlayImage.Size = new System.Drawing.Size(35, 30);

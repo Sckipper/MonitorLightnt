@@ -26,7 +26,7 @@ using System;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     public static class Native
     {

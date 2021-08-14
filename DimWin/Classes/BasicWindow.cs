@@ -23,14 +23,12 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public class BasicWindow : NativeWindow

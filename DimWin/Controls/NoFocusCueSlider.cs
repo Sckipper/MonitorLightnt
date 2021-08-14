@@ -24,7 +24,7 @@
 
 using System.Windows.Forms;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     class NoFocusSlider : TrackBar
     {

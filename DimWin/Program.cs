@@ -27,7 +27,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     static class Program
     {

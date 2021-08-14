@@ -26,7 +26,7 @@ using System;
 using System.Reflection;
 using Microsoft.Win32;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     class Startup
     {

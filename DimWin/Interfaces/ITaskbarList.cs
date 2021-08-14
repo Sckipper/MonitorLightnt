@@ -25,7 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     [ComImport,
 Guid("56fdf342-fd6d-11d0-958a-006097c9a090"),

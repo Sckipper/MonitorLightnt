@@ -27,7 +27,7 @@ using System.Text;
 using System.Management;
 using System.Runtime.InteropServices;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     public class Helpers
     {

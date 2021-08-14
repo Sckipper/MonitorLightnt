@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     [RunInstaller(true)]
     public class DimWinInstaller : Installer

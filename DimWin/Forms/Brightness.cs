@@ -23,11 +23,12 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Management;
 using System.Windows.Forms;
 
-namespace DimWin
+namespace MonitorLightnt
 {
     public partial class Brightness : Form
     {
@@ -36,6 +37,7 @@ namespace DimWin
         BasicWindow Overlay;
         Timer OntopTimer;
         bool HasChanged;
+        public RichInfoScreen riScreen = new RichInfoScreen();
 
         public Brightness(string[] args)
         {
@@ -49,6 +51,7 @@ namespace DimWin
 
             SetupTrayIcon();
 
+            SetupScreens();
         }
 
         private void SetupOntopTimer()
@@ -83,7 +86,6 @@ namespace DimWin
             try
             {
                 SetOverlayValue(Properties.Settings.Default.Brightness);
-                OverlaySliderValueChanged(null, null);
             }
             catch
             {
@@ -93,7 +95,6 @@ namespace DimWin
             try
             {
                 SetBrightness(GetBrightness());
-                BrightnessSliderValueChanged(null, null);
             }
             catch (Exception)
             {
@@ -109,7 +110,7 @@ namespace DimWin
             KeyDown += KeysDown;
 
             OverlaySlider.ValueChanged += OverlaySliderValueChanged;
-            BrightnessSlider.ValueChanged += BrightnessSliderValueChanged;
+            BrightnessSlider.MouseUp += BrightnessSliderValueChanged;
 
             StartPosition = FormStartPosition.Manual;
             SetLocation();
@@ -174,6 +175,17 @@ namespace DimWin
             
             TrayIcon.ContextMenu = TrayMenu;
             TrayIcon.Visible = true;
+        }
+
+        void SetupScreens()
+        {
+            List<RichInfoScreen> riScreens = RichInfoScreen.Get_RichInfo_Screen();
+            if (riScreen != null)
+                foreach (RichInfoScreen richinfoscreen in riScreens)
+                {
+                    riScreen = richinfoscreen;
+                    break;
+                }
         }
 
         private void SetLocation()
@@ -245,11 +257,12 @@ namespace DimWin
             BrightnessValue.Text = BrightnessSlider.Value.ToString();
         }
 
-        static void SetBrightness(byte targetBrightness)
+        void SetBrightness(byte value)
         {
             //TODO
+            riScreen.SetBrightness(value);
         }
-        static int GetBrightness()
+        int GetBrightness()
         {
             //TODO
             return 10;
