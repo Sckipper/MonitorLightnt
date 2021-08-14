@@ -37,13 +37,13 @@
             this.ContrastImage = new System.Windows.Forms.PictureBox();
             this.BrightnessImage = new System.Windows.Forms.PictureBox();
             this.OverlayImage = new System.Windows.Forms.PictureBox();
-            this.ConstrastSlider = new MonitorLightnt.NoFocusSlider();
+            this.ContrastSlider = new MonitorLightnt.NoFocusSlider();
             this.BrightnessSlider = new MonitorLightnt.NoFocusSlider();
             this.OverlaySlider = new MonitorLightnt.NoFocusSlider();
             ((System.ComponentModel.ISupportInitialize)(this.ContrastImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BrightnessImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ConstrastSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ContrastSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BrightnessSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlaySlider)).BeginInit();
             this.SuspendLayout();
@@ -133,28 +133,30 @@
             this.OverlayImage.TabIndex = 2;
             this.OverlayImage.TabStop = false;
             // 
-            // ConstrastSlider
+            // ContrastSlider
             // 
-            this.ConstrastSlider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ConstrastSlider.Location = new System.Drawing.Point(75, 143);
-            this.ConstrastSlider.Maximum = 100;
-            this.ConstrastSlider.Minimum = 1;
-            this.ConstrastSlider.Name = "ConstrastSlider";
-            this.ConstrastSlider.Size = new System.Drawing.Size(230, 45);
-            this.ConstrastSlider.TabIndex = 7;
-            this.ConstrastSlider.TickFrequency = 5;
-            this.ConstrastSlider.Value = 1;
+            this.ContrastSlider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ContrastSlider.Location = new System.Drawing.Point(75, 143);
+            this.ContrastSlider.Maximum = 100;
+            this.ContrastSlider.Minimum = 1;
+            this.ContrastSlider.Name = "ContrastSlider";
+            this.ContrastSlider.Size = new System.Drawing.Size(230, 45);
+            this.ContrastSlider.TabIndex = 7;
+            this.ContrastSlider.TickFrequency = 5;
+            this.ContrastSlider.Value = 1;
             // 
             // BrightnessSlider
             // 
             this.BrightnessSlider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BrightnessSlider.LargeChange = 10;
             this.BrightnessSlider.Location = new System.Drawing.Point(75, 78);
             this.BrightnessSlider.Maximum = 100;
             this.BrightnessSlider.Name = "BrightnessSlider";
             this.BrightnessSlider.Size = new System.Drawing.Size(230, 45);
+            this.BrightnessSlider.SmallChange = 5;
             this.BrightnessSlider.TabIndex = 3;
             this.BrightnessSlider.TickFrequency = 5;
-            this.BrightnessSlider.Value = 1;
+            this.BrightnessSlider.Value = 5;
             // 
             // OverlaySlider
             // 
@@ -178,7 +180,7 @@
             this.Controls.Add(this.ContrastLabel);
             this.Controls.Add(this.ContrastImage);
             this.Controls.Add(this.ContrastValue);
-            this.Controls.Add(this.ConstrastSlider);
+            this.Controls.Add(this.ContrastSlider);
             this.Controls.Add(this.BrightnessLabel);
             this.Controls.Add(this.BrightnessImage);
             this.Controls.Add(this.BrightnessValue);
@@ -200,7 +202,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ContrastImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BrightnessImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ConstrastSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ContrastSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BrightnessSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlaySlider)).EndInit();
             this.ResumeLayout(false);
@@ -220,7 +222,7 @@
         private System.Windows.Forms.Label ContrastLabel;
         private System.Windows.Forms.PictureBox ContrastImage;
         private System.Windows.Forms.Label ContrastValue;
-        private NoFocusSlider ConstrastSlider;
+        private NoFocusSlider ContrastSlider;
     }
 }
 

@@ -49,9 +49,13 @@ namespace MonitorLightnt
 
             SetupSlidersForm();
 
+            SetupScreens();
+
+            SetupSlidersValues();
+
             SetupTrayIcon();
 
-            SetupScreens();
+            
         }
 
         private void SetupOntopTimer()
@@ -71,11 +75,6 @@ namespace MonitorLightnt
                         (int)(Native.SetWindowPosFlags.SWP_NOACTIVATE | Native.SetWindowPosFlags.SWP_NOMOVE |
                         Native.SetWindowPosFlags.SWP_NOSIZE | Native.SetWindowPosFlags.SWP_SHOWWINDOW));
                 }
-
-               /* if (BrightnessSlider != null)
-                {
-                    BrightnessSlider.Value = Math.Max(Helpers.Brightness, 1);
-                }*/
             };
 
             OntopTimer.Start();
@@ -83,24 +82,6 @@ namespace MonitorLightnt
 
         void SetupSlidersForm()
         {
-            try
-            {
-                SetOverlayValue(Properties.Settings.Default.Brightness);
-            }
-            catch
-            {
-                OverlaySlider.Value = OverlaySlider.Maximum;
-            }
-
-            try
-            {
-                SetBrightness(GetBrightness());
-            }
-            catch (Exception)
-            {
-                BrightnessSlider.Value = BrightnessSlider.Maximum;
-            }
-
             OverlaySlider.LostFocus += LoseFocus;
             BrightnessSlider.LostFocus += LoseFocus;
             LostFocus += LoseFocus;
@@ -110,7 +91,9 @@ namespace MonitorLightnt
             KeyDown += KeysDown;
 
             OverlaySlider.ValueChanged += OverlaySliderValueChanged;
-            BrightnessSlider.MouseUp += BrightnessSliderValueChanged;
+            OverlaySlider.MouseUp += OverlaySliderChangeValue;
+            BrightnessSlider.ValueChanged += BrightnessSliderValueChanged;
+            BrightnessSlider.MouseUp += BrightnessSliderChangeValue;
 
             StartPosition = FormStartPosition.Manual;
             SetLocation();
@@ -188,6 +171,39 @@ namespace MonitorLightnt
                 }
         }
 
+        void SetupSlidersValues()
+        {
+            try
+            {
+                SetOverlayValue(Properties.Settings.Default.Brightness);
+            }
+            catch
+            {
+                OverlaySlider.Value = OverlaySlider.Maximum;
+                OverlayValue.Text = OverlaySlider.Maximum.ToString();
+            }
+
+            try
+            {
+                SetBrightness(GetBrightness());
+            }
+            catch (Exception ex)
+            {
+                BrightnessSlider.Value = BrightnessSlider.Maximum;
+                BrightnessValue.Text = BrightnessSlider.Maximum.ToString();
+            }
+
+            try
+            {
+                SetContrast(GetContrast());
+            }
+            catch (Exception ex)
+            {
+                ContrastSlider.Value = ContrastSlider.Maximum;
+                ContrastSlider.Text = ContrastSlider.Maximum.ToString();
+            }
+        }
+
         private void SetLocation()
         {
             var workingArea = Screen.PrimaryScreen.WorkingArea;
@@ -211,20 +227,19 @@ namespace MonitorLightnt
             menItm.Checked = Startup.CheckStartup();
         }
 
-        void SetBrightness(int value)
-        {
-            //TODO
-            value = Math.Min(Math.Max(value, BrightnessSlider.Minimum), BrightnessSlider.Maximum);
-            BrightnessSlider.Value = value;
-        }
-
         void SetOverlayValue(int value)
         {
             value = Math.Min(Math.Max(value, OverlaySlider.Minimum), OverlaySlider.Maximum);
             OverlaySlider.Value = value;
+            OverlayValue.Text = value.ToString();
         }
 
         void OverlaySliderValueChanged(object sender, EventArgs e)
+        {
+            OverlayValue.Text = OverlaySlider.Value.ToString();
+        }
+
+        void OverlaySliderChangeValue(object sender, EventArgs e)
         {
             var overlay = 100 - (double)OverlaySlider.Value;
 
@@ -234,39 +249,47 @@ namespace MonitorLightnt
             }
 
             Overlay.Opacity = overlay / 100;
-            OverlayValue.Text = OverlaySlider.Value.ToString();
             Properties.Settings.Default["Brightness"] = OverlaySlider.Value;
             HasChanged = true;
         }
 
         void BrightnessSliderValueChanged(object sender, EventArgs e)
         {
-            var brightness = BrightnessSlider.Value;
-            if (brightness < 0)
-            {
-                brightness = 0;
-            }
-            byte g = 0;
+            BrightnessValue.Text = BrightnessSlider.Value.ToString();
+        }
 
-            if (byte.TryParse(BrightnessSlider.Value + "", out g))
-            {
-                SetBrightness(g);
-            }
-
+        void BrightnessSliderChangeValue(object sender, EventArgs e)
+        {
+            int brightness = BrightnessSlider.Value;
+            SetBrightness(brightness);
             Helpers.Brightness = brightness;
             BrightnessValue.Text = BrightnessSlider.Value.ToString();
         }
 
-        void SetBrightness(byte value)
+        void SetBrightness(int value)
         {
-            //TODO
-            riScreen.SetBrightness(value);
+            byte brightness = (byte) Math.Min(Math.Max(value, BrightnessSlider.Minimum), BrightnessSlider.Maximum);
+
+            riScreen.SetBrightness(brightness);
+            BrightnessSlider.Value = brightness;
+            BrightnessValue.Text = BrightnessSlider.Value.ToString();
         }
         int GetBrightness()
         {
-            //TODO
-            return 10;
+            return riScreen.GetBrightness();
+        }
 
+        void SetContrast(byte value) //TODO
+        {
+            //riScreen.SetContrast(value);
+            ContrastSlider.Value = value;
+            ContrastSlider.Text = ContrastSlider.Value.ToString();
+        }
+
+        byte GetContrast() //TODO
+        {
+            // return (byte) riScreen.GetContrast();
+            return 100;
         }
 
         void KeysDown(object sender, KeyEventArgs e)

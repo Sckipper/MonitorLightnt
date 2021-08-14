@@ -195,7 +195,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SMC"
         "ProductCode" = "8:{E70AB4E9-33BC-49ED-8142-2F82636D7C9E}"
-        "PackageCode" = "8:{3B867DB9-E319-4287-8437-EA9A8F88B643}"
+        "PackageCode" = "8:{5302A8C7-E393-41CF-88C5-701AD6B145B1}"
         "UpgradeCode" = "8:{736CE0A4-E31F-48AF-A9FE-E7080112F489}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -317,7 +317,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9CCC8EB8DB724872A29F94BBA5F99F02"
             {
-            "Name" = "8:Shortcut to Primary output from DimWin (Active)"
+            "Name" = "8:Monitor Lightn't"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -326,7 +326,7 @@
             "Target" = "8:_3083BAB9BB7E4CB99B28A223FFD1F189"
             "Folder" = "8:_783EFF1B26034304865D13174AB4C5F8"
             "WorkingFolder" = "8:_C3BA05D0AAA94A099142E5B5CD74CFF1"
-            "Icon" = "8:"
+            "Icon" = "8:_B45CAC5304A1400E86D2C89E3D159058"
             "Feature" = "8:"
             }
         }
