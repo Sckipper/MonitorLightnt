@@ -88,6 +88,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -193,16 +201,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SMC"
-        "ProductCode" = "8:{E70AB4E9-33BC-49ED-8142-2F82636D7C9E}"
-        "PackageCode" = "8:{5302A8C7-E393-41CF-88C5-701AD6B145B1}"
+        "ProductName" = "8:Monitor Lightn't"
+        "ProductCode" = "8:{5ED715F1-62E8-4F9B-8CC9-47DE3E134164}"
+        "PackageCode" = "8:{D70E6DF6-C2F6-4C9C-BABB-EF1124FC1716}"
         "UpgradeCode" = "8:{736CE0A4-E31F-48AF-A9FE-E7080112F489}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Sckipperon"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -210,7 +218,7 @@
         "Subject" = "8:"
         "ARPCONTACT" = "8:Sckipper"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:Samsung Monitor Control"
+        "ARPCOMMENTS" = "8:Monitor Control"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:_B45CAC5304A1400E86D2C89E3D159058"
         "ARPIconIndex" = "3:0"
@@ -315,9 +323,9 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9CCC8EB8DB724872A29F94BBA5F99F02"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_422F3357C7D54F718118BB220D549291"
             {
-            "Name" = "8:Monitor Lightn't"
+            "Name" = "8:MonitorLightn't"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -326,7 +334,7 @@
             "Target" = "8:_3083BAB9BB7E4CB99B28A223FFD1F189"
             "Folder" = "8:_783EFF1B26034304865D13174AB4C5F8"
             "WorkingFolder" = "8:_C3BA05D0AAA94A099142E5B5CD74CFF1"
-            "Icon" = "8:_B45CAC5304A1400E86D2C89E3D159058"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
