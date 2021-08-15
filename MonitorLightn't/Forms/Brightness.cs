@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace MonitorLightnt
 {
@@ -35,9 +36,11 @@ namespace MonitorLightnt
         NotifyIcon TrayIcon;
         ContextMenu TrayMenu;
         BasicWindow Overlay;
-        Timer OntopTimer;
+        System.Windows.Forms.Timer OntopTimer;
         bool HasChanged;
         public RichInfoScreen riScreen = new RichInfoScreen();
+        Thread getBrightnessThread;
+        Thread getContrastThread;
 
         public Brightness(string[] args)
         {
@@ -58,7 +61,7 @@ namespace MonitorLightnt
 
         private void SetupOntopTimer()
         {
-            OntopTimer = new Timer()
+            OntopTimer = new System.Windows.Forms.Timer()
             {
                 Interval = 200,
             };
@@ -174,6 +177,46 @@ namespace MonitorLightnt
                 }
         }
 
+        void InitializeBrightness()
+        {
+            int brightness = -1;
+            while (brightness < BrightnessSlider.Minimum || brightness > BrightnessSlider.Maximum)
+            {
+                try
+                {
+                    brightness = GetBrightness();
+                }
+                catch
+                {
+                    Thread.Sleep(100);
+                }
+            }
+
+            BrightnessSlider.Invoke((MethodInvoker)(() =>  BrightnessSlider.Value = brightness ));
+            BrightnessValue.Invoke((MethodInvoker)(() => BrightnessValue.Text = brightness.ToString() ));
+            BrightnessValue.Invoke((MethodInvoker)(() => BrightnessValue.ForeColor = Color.White ));
+        }
+
+        void InitializeContrast()
+        {
+            int contrast = -1;
+            while (contrast < ContrastSlider.Minimum || contrast > ContrastSlider.Maximum)
+            {
+                try
+                {
+                    contrast = GetContrast();
+                }
+                catch
+                {
+                    Thread.Sleep(100);
+                }
+            }
+
+            ContrastSlider.Invoke((MethodInvoker)(() => ContrastSlider.Value = contrast));
+            ContrastValue.Invoke((MethodInvoker)(() => ContrastValue.Text = contrast.ToString()));
+            ContrastValue.Invoke((MethodInvoker)(() => ContrastValue.ForeColor = Color.White));
+        }
+
         void SetupSlidersValues()
         {
             // Overlay - ToDo keep Overlay value in memory
@@ -181,46 +224,18 @@ namespace MonitorLightnt
             OverlayValue.Text = OverlaySlider.Value.ToString();
 
             // Brightness
-            try
-            {
-                int brightness = GetBrightness();
-                if (brightness > BrightnessSlider.Minimum && brightness < BrightnessSlider.Maximum)
-                {
-                    BrightnessSlider.Value = brightness;
-                    BrightnessSlider.Text = brightness.ToString();
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch
-            {
-                BrightnessSlider.Value = BrightnessSlider.Maximum;
-                BrightnessValue.ForeColor = Color.Red;
-                BrightnessValue.Text = BrightnessSlider.Maximum.ToString();
-            }
+            BrightnessSlider.Value = BrightnessSlider.Maximum;
+            BrightnessValue.ForeColor = Color.Red;
+            BrightnessValue.Text = BrightnessSlider.Maximum.ToString();
+            getBrightnessThread = new Thread(new ThreadStart(InitializeBrightness));
+            getBrightnessThread.Start();
 
             //Contrast
-            try
-            {
-                int contrast = GetContrast();
-                if (contrast > ContrastSlider.Minimum && contrast < ContrastSlider.Maximum)
-                {
-                    ContrastSlider.Value = contrast;
-                    ContrastValue.Text = contrast.ToString();
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch
-            {
-                ContrastSlider.Value = ContrastSlider.Maximum;
-                ContrastValue.ForeColor = Color.Red;
-                ContrastValue.Text = ContrastSlider.Maximum.ToString();
-            }
+            ContrastSlider.Value = ContrastSlider.Maximum;
+            ContrastValue.ForeColor = Color.Red;
+            ContrastValue.Text = ContrastSlider.Maximum.ToString();
+            getContrastThread = new Thread(new ThreadStart(InitializeContrast));
+            getContrastThread.Start();
         }
 
         private void SetLocation()
