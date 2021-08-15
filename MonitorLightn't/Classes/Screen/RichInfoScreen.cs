@@ -76,121 +76,44 @@ namespace MonitorLightnt
 
         public int GetBrightness()
         {
-            int num1 = -1, num2;
             DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor = this.PhysicalMonitor;
-            ref DxvaMonFn.PHYSICAL_MONITOR? local = ref physicalMonitor;
-
-            if (this.WMIMonitorID?.InstanceName != null)
-                num1 = wmiMonFn.GetBrightness(this.WMIMonitorID.InstanceName);
-
-            if (!local.HasValue)
-            {
-                num2 = 0;
-            }
-            else
-            {
-                local.GetValueOrDefault();
-                num2 = 1;
-            }
-
-            if (num2 != 0 && num1 == -1)
-            {
-                physicalMonitor = this.PhysicalMonitor;
-                num1 = DxvaMonFn.GetPhysicalMonitorBrightness(physicalMonitor.Value);
-            }
-
-            return num1;
-        }
-
-        public int SetBrightness(byte value)
-        {
-            bool flag = false;
-            DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor;
-            int num2;
-
-            if (this.WMIMonitorID != null)
-                flag = wmiMonFn.SetBrightness(value, this.WMIMonitorID.InstanceName);
-
-            if (!flag)
-            {
-                physicalMonitor = this.PhysicalMonitor;
-                ref DxvaMonFn.PHYSICAL_MONITOR? local = ref physicalMonitor;
-                IntPtr? nullable = local.HasValue ? new IntPtr?(local.GetValueOrDefault().hPhysicalMonitor) : new IntPtr?();
-                IntPtr zero = IntPtr.Zero;
-                num2 = nullable.HasValue ? (nullable.HasValue ? (nullable.GetValueOrDefault() != zero ? 1 : 0) : 0) : 1;
-            }
-            else
-                num2 = 0;
-
-            if (num2 != 0)
-            {
-                physicalMonitor = this.PhysicalMonitor;
-                if (DxvaMonFn.SetPhysicalMonitorBrightness(physicalMonitor.Value, (double)value))
-                {
-                    physicalMonitor = this.PhysicalMonitor;
-                    DxvaMonFn.SaveCurrentMonitorSettings(physicalMonitor.Value);
-                }
-            }
-            RicInfoScreenHolder.RememberBrightness(this, value);
+            int value = DxvaMonFn.GetPhysicalMonitorBrightness(physicalMonitor.Value);
 
             return value;
+        }
+
+        public void SetBrightness(byte value)
+        {
+            DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor;
+            physicalMonitor = this.PhysicalMonitor;
+
+            if (!DxvaMonFn.SetPhysicalMonitorBrightness(physicalMonitor.Value, (double)value))
+            {
+                physicalMonitor = this.PhysicalMonitor;
+                DxvaMonFn.SaveCurrentMonitorSettings(physicalMonitor.Value);
+                RicInfoScreenHolder.RememberBrightness(this, value);
+            }
         }
 
         public int GetContrast()
         {
-            int num1 = -1;
             DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor = this.PhysicalMonitor;
-            ref DxvaMonFn.PHYSICAL_MONITOR? local = ref physicalMonitor;
-            int num2;
-
-            if (!local.HasValue)
-            {
-                num2 = 0;
-            }
-            else
-            {
-                local.GetValueOrDefault();
-                num2 = 1;
-            }
-
-            if (num2 != 0 && num1 == -1)
-            {
-                physicalMonitor = this.PhysicalMonitor;
-                num1 = DxvaMonFn.GetPhysicalMonitorContrast(physicalMonitor.Value);
-            }
-
-            return num1;
-        }
-
-        public int SetContrast(byte value)
-        {
-            bool flag = false;
-            DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor;
-            int num2;
-
-            if (!flag)
-            {
-                physicalMonitor = this.PhysicalMonitor;
-                ref DxvaMonFn.PHYSICAL_MONITOR? local = ref physicalMonitor;
-                IntPtr? nullable = local.HasValue ? new IntPtr?(local.GetValueOrDefault().hPhysicalMonitor) : new IntPtr?();
-                IntPtr zero = IntPtr.Zero;
-                num2 = nullable.HasValue ? (nullable.HasValue ? (nullable.GetValueOrDefault() != zero ? 1 : 0) : 0) : 1;
-            }
-            else
-                num2 = 0;
-
-            if (num2 != 0)
-            {
-                physicalMonitor = this.PhysicalMonitor;
-                if (DxvaMonFn.SetPhysicalMonitorContrast(physicalMonitor.Value, (double)value))
-                {
-                    physicalMonitor = this.PhysicalMonitor;
-                    DxvaMonFn.SaveCurrentMonitorSettings(physicalMonitor.Value);
-                }
-            }
-            RicInfoScreenHolder.RememberContrast(this, value);
+            int value = DxvaMonFn.GetPhysicalMonitorContrast(physicalMonitor.Value);
 
             return value;
+        }
+
+        public void SetContrast(byte value)
+        {
+            DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor;
+
+            physicalMonitor = this.PhysicalMonitor;
+            if (!DxvaMonFn.SetPhysicalMonitorContrast(physicalMonitor.Value, (double)value))
+            {
+                physicalMonitor = this.PhysicalMonitor;
+                DxvaMonFn.SaveCurrentMonitorSettings(physicalMonitor.Value);
+                RicInfoScreenHolder.RememberContrast(this, value);
+            }
         }
 
         public static List<RichInfoScreen> Get_RichInfo_Screen()

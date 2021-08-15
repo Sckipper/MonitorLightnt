@@ -12,7 +12,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -114,7 +113,7 @@ namespace MonitorLightnt
           DxvaMonFn.PHYSICAL_MONITOR physicalMonitor,
           double brightness)
         {
-            bool flag = DxvaMonFn.SetMonitorBrightness(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(brightness));
+            DxvaMonFn.SetMonitorBrightness(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(brightness));
             Thread.Sleep(60);
             uint minBrightness = 0;
             uint currentBrightness = 0;
@@ -143,7 +142,7 @@ namespace MonitorLightnt
           DxvaMonFn.PHYSICAL_MONITOR physicalMonitor,
           double contrast)
         {
-            bool flag = DxvaMonFn.SetMonitorContrast(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(contrast));
+            DxvaMonFn.SetMonitorContrast(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(contrast));
             Thread.Sleep(60);
             uint minContrast = 0;
             uint currentContrast = 0;

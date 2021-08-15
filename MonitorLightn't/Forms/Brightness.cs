@@ -2,6 +2,7 @@
     The MIT License (MIT)
 
     Copyright (c) 2019 reblGreen Software Ltd. (https://reblgreen.com/)
+                  2021 Sckipper (https://github.com/Sckipper)  
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +26,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Management;
 using System.Windows.Forms;
 
 namespace MonitorLightnt
@@ -54,8 +54,6 @@ namespace MonitorLightnt
             SetupSlidersValues();
 
             SetupTrayIcon();
-
-            
         }
 
         private void SetupOntopTimer()
@@ -92,10 +90,13 @@ namespace MonitorLightnt
 
             OverlaySlider.ValueChanged += OverlaySliderValueChanged;
             OverlaySlider.MouseUp += OverlaySliderChangeValue;
+            OverlayImageToolTip.SetToolTip(OverlayImage, "Overlay");
             BrightnessSlider.ValueChanged += BrightnessSliderValueChanged;
             BrightnessSlider.MouseUp += BrightnessSliderChangeValue;
+            BrightnessImageToolTip.SetToolTip(BrightnessImage, "Brightness");
             ContrastSlider.ValueChanged += ContrastSliderValueChanged;
             ContrastSlider.MouseUp += ContrastSliderChangeValue;
+            ContrastImageToolTip.SetToolTip(ContrastImage, "Contrast");
 
             StartPosition = FormStartPosition.Manual;
             SetLocation();
@@ -141,13 +142,13 @@ namespace MonitorLightnt
         void SetupTrayIcon()
         {
             TrayMenu = new ContextMenu();
-            TrayMenu.MenuItems.Add("Run On Startup", RunOnStartup);
+            TrayMenu.MenuItems.Add("Run at Startup", RunOnStartup);
             TrayMenu.MenuItems.Add("-");
             TrayMenu.MenuItems.Add("Exit", OnExit);
             TrayMenu.MenuItems[0].Checked = Startup.CheckStartup();
 
             TrayIcon = new NotifyIcon();
-            TrayIcon.Text = "dimwin Brightness";
+            TrayIcon.Text = "Monitor Lightn't";
             TrayIcon.Icon = Icon;
 
             TrayIcon.Click += (object sender, EventArgs e) =>
@@ -175,39 +176,49 @@ namespace MonitorLightnt
 
         void SetupSlidersValues()
         {
+            // Overlay - ToDo keep Overlay value in memory
+            OverlaySlider.Value = Properties.Settings.Default.Brightness;
+            OverlayValue.Text = OverlaySlider.Value.ToString();
+
+            // Brightness
             try
             {
-                SetOverlayValue(Properties.Settings.Default.Brightness);
+                int brightness = GetBrightness();
+                if (brightness > BrightnessSlider.Minimum && brightness < BrightnessSlider.Maximum)
+                {
+                    BrightnessSlider.Value = brightness;
+                    BrightnessSlider.Text = brightness.ToString();
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch
             {
-                OverlaySlider.Value = OverlaySlider.Maximum;
-                OverlayValue.Text = OverlaySlider.Maximum.ToString();
-            }
-
-            try
-            {
-                int brightness = -1;
-                while (brightness < 0)
-                {
-                    brightness = GetBrightness();
-                }
-                
-                SetBrightness(brightness);
-            }
-            catch (Exception ex)
-            {
                 BrightnessSlider.Value = BrightnessSlider.Maximum;
+                BrightnessValue.ForeColor = Color.Red;
                 BrightnessValue.Text = BrightnessSlider.Maximum.ToString();
             }
 
+            //Contrast
             try
             {
-                SetContrast(GetContrast());
+                int contrast = GetContrast();
+                if (contrast > ContrastSlider.Minimum && contrast < ContrastSlider.Maximum)
+                {
+                    ContrastSlider.Value = contrast;
+                    ContrastValue.Text = contrast.ToString();
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
-            catch (Exception ex)
+            catch
             {
                 ContrastSlider.Value = ContrastSlider.Maximum;
+                ContrastValue.ForeColor = Color.Red;
                 ContrastValue.Text = ContrastSlider.Maximum.ToString();
             }
         }
@@ -233,13 +244,6 @@ namespace MonitorLightnt
             }
 
             menItm.Checked = Startup.CheckStartup();
-        }
-
-        void SetOverlayValue(int value)
-        {
-            value = Math.Min(Math.Max(value, OverlaySlider.Minimum), OverlaySlider.Maximum);
-            OverlaySlider.Value = value;
-            OverlayValue.Text = value.ToString();
         }
 
         void OverlaySliderValueChanged(object sender, EventArgs e)
@@ -274,48 +278,56 @@ namespace MonitorLightnt
             BrightnessValue.Text = BrightnessSlider.Value.ToString();
         }
 
-        void SetBrightness(int value)
-        {
-            byte brightness = (byte) Math.Min(Math.Max(value, BrightnessSlider.Minimum), BrightnessSlider.Maximum);
-
-            riScreen.SetBrightness(brightness);
-            BrightnessSlider.Value = brightness;
-            BrightnessValue.Text = BrightnessSlider.Value.ToString();
-        }
         int GetBrightness()
         {
-            int brightness = riScreen.GetBrightness();
-            byte value = (byte)Math.Min(Math.Max(brightness, BrightnessSlider.Minimum), BrightnessSlider.Maximum);
-            return value;
+            return riScreen.GetBrightness();
+        }
+
+        void SetBrightness(int value)
+        {
+            if (value < BrightnessSlider.Minimum || value > BrightnessSlider.Maximum)
+            {
+                BrightnessValue.ForeColor = Color.Red;
+                return;
+            }
+
+            riScreen.SetBrightness((byte)value);
+            BrightnessSlider.Value = value;
+            BrightnessValue.ForeColor = Color.White;
+            BrightnessValue.Text = BrightnessSlider.Value.ToString();
         }
 
         void ContrastSliderValueChanged(object sender, EventArgs e)
         {
             ContrastValue.Text = ContrastSlider.Value.ToString();
+            ContrastValue.ForeColor = Color.White;
         }
 
         void ContrastSliderChangeValue(object sender, EventArgs e)
         {
-            int contrast = ContrastSlider.Value;
-            SetContrast(contrast);
+            SetContrast(ContrastSlider.Value);
+        }
+
+        int GetContrast()
+        {
+            return riScreen.GetContrast();
+        }
+
+        void SetContrast(int value)
+        {
+            if (value < ContrastSlider.Minimum || value > ContrastSlider.Maximum)
+            {
+                ContrastValue.ForeColor = Color.Red;
+                return;
+            }
+
+            riScreen.SetContrast((byte)value);
+            ContrastSlider.Value = value;
+            ContrastValue.ForeColor = Color.White;
             ContrastValue.Text = ContrastSlider.Value.ToString();
         }
 
-        void SetContrast(int value) //TODO
-        {
-            byte contrast = (byte)Math.Min(Math.Max(value, ContrastSlider.Minimum), ContrastSlider.Maximum);
-
-            riScreen.SetContrast(contrast);
-            ContrastSlider.Value = contrast;
-            ContrastValue.Text = ContrastSlider.Value.ToString();
-        }
-
-        byte GetContrast()
-        {
-            int contrast = riScreen.GetContrast();
-            byte value = (byte) Math.Min(Math.Max(contrast, ContrastSlider.Minimum), ContrastSlider.Maximum);
-            return value;
-        }
+        
 
         void KeysDown(object sender, KeyEventArgs e)
         {

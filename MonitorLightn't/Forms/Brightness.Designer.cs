@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Brightness));
             this.OverlayValue = new System.Windows.Forms.Label();
             this.BrightnessValue = new System.Windows.Forms.Label();
@@ -37,9 +38,12 @@
             this.ContrastImage = new System.Windows.Forms.PictureBox();
             this.BrightnessImage = new System.Windows.Forms.PictureBox();
             this.OverlayImage = new System.Windows.Forms.PictureBox();
+            this.OverlayImageToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ContrastSlider = new MonitorLightnt.NoFocusSlider();
             this.BrightnessSlider = new MonitorLightnt.NoFocusSlider();
             this.OverlaySlider = new MonitorLightnt.NoFocusSlider();
+            this.BrightnessImageToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ContrastImageToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ContrastImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BrightnessImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayImage)).BeginInit();
@@ -222,6 +226,9 @@
         private System.Windows.Forms.PictureBox ContrastImage;
         private System.Windows.Forms.Label ContrastValue;
         private NoFocusSlider ContrastSlider;
+        private System.Windows.Forms.ToolTip OverlayImageToolTip;
+        private System.Windows.Forms.ToolTip BrightnessImageToolTip;
+        private System.Windows.Forms.ToolTip ContrastImageToolTip;
     }
 }
 
