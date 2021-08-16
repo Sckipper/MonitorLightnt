@@ -19,7 +19,7 @@ The whole project is GPLv3 (Please see [licence file](/LICENCE.md) for more info
 
 ## Contribution guidelines ##
 
-Fork [reblGreen DimWin Brightness](https://github.com/reblGreen/DimWin-Brightness), make some changes, make a pull request.
+Fork, make some changes, make a pull request.
 Code will be reviewed when a pull request is made.
 
 The project will receive updates in my free time.
