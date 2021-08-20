@@ -38,9 +38,10 @@ namespace MonitorLightnt
         BasicWindow Overlay;
         System.Windows.Forms.Timer OntopTimer;
         bool HasChanged;
-        public RichInfoScreen riScreen = new RichInfoScreen();
+        public List<RichInfoScreen> riScreens;
         Thread getBrightnessThread;
         Thread getContrastThread;
+        bool isAdvancedView = true;
 
         public Brightness(string[] args)
         {
@@ -58,6 +59,7 @@ namespace MonitorLightnt
 
             SetupTrayIcon();
         }
+
 
         private void SetupOntopTimer()
         {
@@ -146,6 +148,7 @@ namespace MonitorLightnt
         {
             TrayMenu = new ContextMenu();
             TrayMenu.MenuItems.Add("Run at Startup", RunOnStartup);
+            TrayMenu.MenuItems.Add(isAdvancedView ? "Basic view" : "Advanced view", RunOnStartup);
             TrayMenu.MenuItems.Add("-");
             TrayMenu.MenuItems.Add("Exit", OnExit);
             TrayMenu.MenuItems[0].Checked = Startup.CheckStartup();
@@ -168,13 +171,15 @@ namespace MonitorLightnt
 
         void SetupScreens()
         {
-            List<RichInfoScreen> riScreens = RichInfoScreen.Get_RichInfo_Screen();
-            if (riScreen != null)
+            riScreens = RichInfoScreen.Get_RichInfo_Screen();
+            if (riScreens != null)
+            {
                 foreach (RichInfoScreen richinfoscreen in riScreens)
                 {
-                    riScreen = richinfoscreen;
-                    break;
+                    ScreenComboBox.Items.Add(richinfoscreen.TooltipText);
                 }
+                ScreenComboBox.SelectedIndex = 0;
+            }
         }
 
         void InitializeBrightness()
@@ -295,7 +300,7 @@ namespace MonitorLightnt
 
         int GetBrightness()
         {
-            return riScreen.GetBrightness();
+            return riScreens[ScreenComboBox.SelectedIndex].GetBrightness();
         }
 
         void SetBrightness(int value)
@@ -306,7 +311,7 @@ namespace MonitorLightnt
                 return;
             }
 
-            riScreen.SetBrightness((byte)value);
+            riScreens[ScreenComboBox.SelectedIndex].SetBrightness((byte)value);
             BrightnessSlider.Value = value;
             BrightnessValue.ForeColor = Color.White;
             BrightnessValue.Text = BrightnessSlider.Value.ToString();
@@ -325,7 +330,7 @@ namespace MonitorLightnt
 
         int GetContrast()
         {
-            return riScreen.GetContrast();
+            return riScreens[ScreenComboBox.SelectedIndex].GetContrast();
         }
 
         void SetContrast(int value)
@@ -336,7 +341,7 @@ namespace MonitorLightnt
                 return;
             }
 
-            riScreen.SetContrast((byte)value);
+            riScreens[ScreenComboBox.SelectedIndex].SetContrast((byte)value);
             ContrastSlider.Value = value;
             ContrastValue.ForeColor = Color.White;
             ContrastValue.Text = ContrastSlider.Value.ToString();

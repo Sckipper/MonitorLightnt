@@ -151,8 +151,9 @@ namespace MonitorLightnt
                     Screen = allScreen,
                     dc_TargetDeviceName = nullable,
                     PhysicalMonitors = physicalMonitorArray,
-                    WMIMonitorID = wmiMonitorId2
-                });
+                    WMIMonitorID = wmiMonitorId2,
+                    TooltipText = wmiMonitorId2.UserFriendlyName
+                }); ;
             }
             if (wmiMonitorId2List.Count<wmiMonFn.WMIMonitorID2>() > 0)
             {
