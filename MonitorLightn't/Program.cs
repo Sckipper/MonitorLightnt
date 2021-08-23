@@ -31,7 +31,7 @@ namespace MonitorLightnt
 {
     static class Program
     {
-        static Mutex Mutex = new Mutex(true, "reblGreen Software DimWin Brightness");
+        static Mutex Mutex = new Mutex(true, "Monitor Lightn't");
 
         /// <summary>
         /// The main entry point for the application.

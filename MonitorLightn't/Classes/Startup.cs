@@ -30,7 +30,7 @@ namespace MonitorLightnt
 {
     class Startup
     {
-        const string ApplicationName = "reblGreen DimWin Brightness";
+        const string ApplicationName = "MonitorLightn't";
 
         public static void AddToStartup()
         {

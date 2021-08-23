@@ -47,6 +47,8 @@ namespace MonitorLightnt
         {
             InitializeComponent();
 
+            SetupSlidersGrid();
+
             SetupOntopTimer();
 
             SetupContrastOverlay();
@@ -60,6 +62,16 @@ namespace MonitorLightnt
             SetupTrayIcon();
         }
 
+
+        void SetupSlidersGrid()
+        {
+            BrightnessLabel.Parent = LayoutPanel;
+            BrightnessLabel.AutoSize = true;
+            BrightnessLabel.Padding = new Padding(0, 0, 0, 75);
+
+
+            ContrastLabel.Parent = LayoutPanel;
+        }
 
         private void SetupOntopTimer()
         {
