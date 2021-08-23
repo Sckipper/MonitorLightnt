@@ -1,7 +1,6 @@
 # Monitor Lightn't
 Windows Forms app to control monitor brightness, contrast + a shadowing layer.
 
-This project is a combination of DimWin-Brightness (https://github.com/reblGreen/DimWin-Brightness) and Win10_BrightnessSlider (https://github.com/blackholeearth/Win10_BrightnessSlider) + aditional work.
 
 Developing monitor is a Samsung LC27G55TQWRXEN
 
@@ -10,11 +9,15 @@ Developing monitor is a Samsung LC27G55TQWRXEN
 ![alt text](https://i.ibb.co/5xtfk2h/Print.png)
 
 
-## Licence ##
+## Requirements ##
+.Net 4.0
 
-Each file has it's own license since it's a combination of 3 projects.
+DirectX Video Acceleration (DXVA2)
 
-The whole project is GPLv3 (Please see [licence file](/LICENCE.md) for more information).
+Microsoft Visual Studio 2019
+
+Microsoft Visual Studio Installer Projects v1.0.0 (You need to remove .vs folder if you install this extension after you open the project)
+
 
 
 ## Contribution guidelines ##
@@ -23,3 +26,12 @@ Fork, make some changes, make a pull request.
 Code will be reviewed when a pull request is made.
 
 The project will receive updates in my free time.
+
+
+
+## Licence ##
+
+Each file has it's own license.
+
+The whole project is GPLv3 (Please see [licence file](/LICENCE.md) for more information).
+
