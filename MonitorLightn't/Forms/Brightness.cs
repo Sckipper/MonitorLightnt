@@ -93,6 +93,7 @@ namespace MonitorLightnt
             BrightnessSlider.KeyDown += KeysDown;
             KeyDown += KeysDown;
 
+            ScreenComboBox.SelectedValueChanged += ScreenComboBoxValueChanged;
             OverlaySlider.ValueChanged += OverlaySliderValueChanged;
             OverlaySlider.MouseUp += OverlaySliderChangeValue;
             OverlayImageToolTip.SetToolTip(OverlayImage, "Overlay");
@@ -264,6 +265,17 @@ namespace MonitorLightnt
             }
 
             menItm.Checked = Startup.CheckStartup();
+        }
+
+        void ScreenComboBoxValueChanged(object sender, EventArgs e)
+        {
+            if(getBrightnessThread != null)
+                getBrightnessThread.Abort();
+
+            if (getContrastThread != null)
+                getContrastThread.Abort();
+
+            SetupSlidersValues();
         }
 
         void OverlaySliderValueChanged(object sender, EventArgs e)

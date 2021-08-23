@@ -262,6 +262,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(370, 180);
             this.Name = "Brightness";
             this.Padding = new System.Windows.Forms.Padding(15);
             this.ShowIcon = false;
