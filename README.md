@@ -16,6 +16,8 @@ DirectX Video Acceleration (DXVA2)
 
 Microsoft Visual Studio 2019
 
+ ".NET desktop development" workload in visual studio installer
+
 Microsoft Visual Studio Installer Projects v1.0.0 (You need to remove .vs folder if you install this extension after you open the project)
 
 
