@@ -41,7 +41,6 @@ namespace MonitorLightnt
         public List<RichInfoScreen> riScreens;
         Thread getBrightnessThread;
         Thread getContrastThread;
-        bool isAdvancedView = true;
 
         public Brightness(string[] args)
         {
@@ -161,7 +160,6 @@ namespace MonitorLightnt
         {
             TrayMenu = new ContextMenu();
             TrayMenu.MenuItems.Add("Run at Startup", RunOnStartup);
-            TrayMenu.MenuItems.Add(isAdvancedView ? "Basic view" : "Advanced view", RunOnStartup);
             TrayMenu.MenuItems.Add("-");
             TrayMenu.MenuItems.Add("Exit", OnExit);
             TrayMenu.MenuItems[0].Checked = Startup.CheckStartup();
@@ -185,13 +183,17 @@ namespace MonitorLightnt
         void SetupScreens()
         {
             riScreens = RichInfoScreen.Get_RichInfo_Screen();
-            if (riScreens != null)
+            if (riScreens != null && riScreens.Count > 1)
             {
                 foreach (RichInfoScreen richinfoscreen in riScreens)
                 {
                     ScreenComboBox.Items.Add(richinfoscreen.TooltipText);
                 }
                 ScreenComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                ScreenComboBox.Visible = false;
             }
         }
 

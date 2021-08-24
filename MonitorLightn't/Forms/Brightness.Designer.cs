@@ -101,6 +101,7 @@
             this.BrightnessLabel.Size = new System.Drawing.Size(230, 13);
             this.BrightnessLabel.TabIndex = 6;
             this.BrightnessLabel.Text = "0              25             50             75            100";
+            this.BrightnessLabel.Visible = false;
             // 
             // ContrastLabel
             // 
@@ -118,6 +119,7 @@
             this.ContrastLabel.Size = new System.Drawing.Size(230, 13);
             this.ContrastLabel.TabIndex = 10;
             this.ContrastLabel.Text = "0              25             50             75            100";
+            this.ContrastLabel.Visible = false;
             // 
             // ContrastValue
             // 
@@ -282,8 +284,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(365, 235);
             this.ControlBox = false;
-            this.Controls.Add(this.ContrastLabel);
             this.Controls.Add(this.BrightnessLabel);
+            this.Controls.Add(this.ContrastLabel);
             this.Controls.Add(this.LayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -307,7 +309,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ContrastSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
