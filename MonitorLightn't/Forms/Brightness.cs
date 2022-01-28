@@ -52,9 +52,9 @@ namespace MonitorLightnt
 
             SetupContrastOverlay();
 
-            SetupSlidersForm();
-
             SetupScreens();
+
+            SetupSlidersForm();
 
             SetupSlidersValues();
 
@@ -96,10 +96,6 @@ namespace MonitorLightnt
 
         void SetupSlidersForm()
         {
-            OverlaySlider.LostFocus += LoseFocus;
-            BrightnessSlider.LostFocus += LoseFocus;
-            LostFocus += LoseFocus;
-
             OverlaySlider.KeyDown += KeysDown;
             BrightnessSlider.KeyDown += KeysDown;
             KeyDown += KeysDown;
@@ -170,10 +166,17 @@ namespace MonitorLightnt
 
             TrayIcon.Click += (object sender, EventArgs e) =>
             {
-                SetLocation();
-                Visible = true;
-                Activate();
-                OverlaySlider.Focus();
+                if (Visible == true)
+                {
+                    Visible = false;
+                } else
+                {
+                    Capture = true;
+                    SetLocation();
+                    Visible = true;
+                    Activate();
+                    OverlaySlider.Focus();
+                }
             };
             
             TrayIcon.ContextMenu = TrayMenu;
@@ -183,18 +186,21 @@ namespace MonitorLightnt
         void SetupScreens()
         {
             riScreens = RichInfoScreen.Get_RichInfo_Screen();
-            if (riScreens != null && riScreens.Count > 1)
+
+            if (riScreens != null)
             {
                 foreach (RichInfoScreen richinfoscreen in riScreens)
                 {
                     ScreenComboBox.Items.Add(richinfoscreen.TooltipText);
                 }
-                ScreenComboBox.SelectedIndex = 0;
             }
-            else
+            if(ScreenComboBox.Items.Count == 1)
             {
-                ScreenComboBox.Visible = false;
+                ScreenComboBox.Hide();
+                LayoutPanel.PerformLayout(); 
             }
+
+            ScreenComboBox.SelectedIndex = 0;
         }
 
         void InitializeBrightness()
@@ -202,14 +208,9 @@ namespace MonitorLightnt
             int brightness = -1;
             while (brightness < BrightnessSlider.Minimum || brightness > BrightnessSlider.Maximum)
             {
-                try
-                {
-                    brightness = GetBrightness();
-                }
-                catch
-                {
+                brightness = GetBrightness();
+                if(brightness < 0)
                     Thread.Sleep(100);
-                }
             }
 
             BrightnessSlider.Invoke((MethodInvoker)(() =>  BrightnessSlider.Value = brightness ));
@@ -226,7 +227,7 @@ namespace MonitorLightnt
                 {
                     contrast = GetContrast();
                 }
-                catch
+                catch (Exception ex)
                 {
                     Thread.Sleep(100);
                 }
@@ -261,8 +262,8 @@ namespace MonitorLightnt
         private void SetLocation()
         {
             var workingArea = Screen.PrimaryScreen.WorkingArea;
-            var left = workingArea.Right - Width;
-            var top = workingArea.Bottom - Height;
+            var left = workingArea.Right - LayoutPanel.Width;
+            var top = workingArea.Bottom - LayoutPanel.Height;
             Location = new Point(left, top);
         }
 
@@ -326,7 +327,9 @@ namespace MonitorLightnt
 
         int GetBrightness()
         {
-            return riScreens[ScreenComboBox.SelectedIndex].GetBrightness();
+            int index = 0;
+            ContrastSlider.Invoke((MethodInvoker)(() => index = ScreenComboBox.SelectedIndex));
+            return riScreens[index].GetBrightness();
         }
 
         void SetBrightness(int value)
@@ -337,9 +340,14 @@ namespace MonitorLightnt
                 return;
             }
 
-            riScreens[ScreenComboBox.SelectedIndex].SetBrightness((byte)value);
+            int index = 0;
+            ContrastSlider.Invoke((MethodInvoker)(() => index = ScreenComboBox.SelectedIndex));
+            if(riScreens[index].SetBrightness((byte)value))
+                BrightnessValue.ForeColor = Color.White;
+            else
+                BrightnessValue.ForeColor = Color.Red;
+
             BrightnessSlider.Value = value;
-            BrightnessValue.ForeColor = Color.White;
             BrightnessValue.Text = BrightnessSlider.Value.ToString();
         }
 
@@ -356,7 +364,9 @@ namespace MonitorLightnt
 
         int GetContrast()
         {
-            return riScreens[ScreenComboBox.SelectedIndex].GetContrast();
+            int index = 0;
+            ContrastSlider.Invoke((MethodInvoker)(() => index = ScreenComboBox.SelectedIndex));
+            return riScreens[index].GetContrast();
         }
 
         void SetContrast(int value)
@@ -367,13 +377,16 @@ namespace MonitorLightnt
                 return;
             }
 
-            riScreens[ScreenComboBox.SelectedIndex].SetContrast((byte)value);
+            int index = 0;
+            ContrastSlider.Invoke((MethodInvoker)(() => index = ScreenComboBox.SelectedIndex));
+            if (riScreens[index].SetContrast((byte)value))
+                ContrastValue.ForeColor = Color.White;
+            else
+                ContrastValue.ForeColor = Color.Red;
+
             ContrastSlider.Value = value;
-            ContrastValue.ForeColor = Color.White;
             ContrastValue.Text = ContrastSlider.Value.ToString();
         }
-
-        
 
         void KeysDown(object sender, KeyEventArgs e)
         {
@@ -383,20 +396,36 @@ namespace MonitorLightnt
             }
         }
 
-        void LoseFocus(object sender, EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
-            if (!ContainsFocus)
-            {
-                Activate();
-                Visible = false;
+            base.OnShown(e);
+            Capture = true;
+        }
 
-                if (HasChanged)
+        protected override void OnMouseCaptureChanged(EventArgs e)
+        {
+
+            if (!Capture)
+            {
+                if (!RectangleToScreen(DisplayRectangle).Contains(Cursor.Position))
                 {
-                    Properties.Settings.Default.Save();
-                    HasChanged = false;
+                    if (HasChanged)
+                    {
+                        Properties.Settings.Default.Save();
+                        HasChanged = false;
+                    }
+
+                    Visible = false;
+                }
+                else
+                {
+                    Capture = true;
                 }
             }
+
+            base.OnMouseCaptureChanged(e);
         }
+
 
         protected override void OnLoad(EventArgs e)
         {
