@@ -223,14 +223,9 @@ namespace MonitorLightnt
             int contrast = -1;
             while (contrast < ContrastSlider.Minimum || contrast > ContrastSlider.Maximum)
             {
-                try
-                {
-                    contrast = GetContrast();
-                }
-                catch (Exception ex)
-                {
-                    Thread.Sleep(100);
-                }
+                contrast = GetContrast();
+                if (contrast < 0)
+                    Thread.Sleep(102);
             }
 
             ContrastSlider.Invoke((MethodInvoker)(() => ContrastSlider.Value = contrast));
@@ -394,12 +389,6 @@ namespace MonitorLightnt
             {
                 Visible = false;
             }
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            Capture = true;
         }
 
         protected override void OnMouseCaptureChanged(EventArgs e)
