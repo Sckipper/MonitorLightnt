@@ -186,6 +186,7 @@
             this.ScreenComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ScreenComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ScreenComboBox.DropDownHeight = 140;
+            this.ScreenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ScreenComboBox.DropDownWidth = 120;
             this.ScreenComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ScreenComboBox.Font = new System.Drawing.Font("Segoe UI Black", 12F);
@@ -237,7 +238,7 @@
             this.OverlaySlider.Minimum = 25;
             this.OverlaySlider.MinimumSize = new System.Drawing.Size(230, 40);
             this.OverlaySlider.Name = "OverlaySlider";
-            this.OverlaySlider.Size = new System.Drawing.Size(230, 40);
+            this.OverlaySlider.Size = new System.Drawing.Size(230, 45);
             this.OverlaySlider.TabIndex = 0;
             this.OverlaySlider.TickFrequency = 5;
             this.OverlaySlider.Value = 100;
@@ -253,7 +254,7 @@
             this.BrightnessSlider.Maximum = 100;
             this.BrightnessSlider.MinimumSize = new System.Drawing.Size(230, 40);
             this.BrightnessSlider.Name = "BrightnessSlider";
-            this.BrightnessSlider.Size = new System.Drawing.Size(230, 40);
+            this.BrightnessSlider.Size = new System.Drawing.Size(230, 45);
             this.BrightnessSlider.TabIndex = 3;
             this.BrightnessSlider.TickFrequency = 5;
             this.BrightnessSlider.Value = 100;
@@ -269,7 +270,7 @@
             this.ContrastSlider.Maximum = 100;
             this.ContrastSlider.MinimumSize = new System.Drawing.Size(230, 40);
             this.ContrastSlider.Name = "ContrastSlider";
-            this.ContrastSlider.Size = new System.Drawing.Size(230, 40);
+            this.ContrastSlider.Size = new System.Drawing.Size(230, 45);
             this.ContrastSlider.TabIndex = 7;
             this.ContrastSlider.TickFrequency = 5;
             this.ContrastSlider.Value = 100;
@@ -309,6 +310,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ContrastSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

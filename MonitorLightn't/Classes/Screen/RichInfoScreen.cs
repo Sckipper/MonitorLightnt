@@ -77,22 +77,27 @@ namespace MonitorLightnt
         public int GetBrightness()
         {
             DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor = this.PhysicalMonitor;
-            int value = DxvaMonFn.GetPhysicalMonitorBrightness(physicalMonitor.Value);
+            int value = 100;
+            if (physicalMonitor != null)
+                value = DxvaMonFn.GetPhysicalMonitorBrightness(physicalMonitor.Value);
 
             return value;
         }
 
-        public void SetBrightness(byte value)
+        public bool SetBrightness(byte value)
         {
             DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor;
             physicalMonitor = this.PhysicalMonitor;
 
-            if (!DxvaMonFn.SetPhysicalMonitorBrightness(physicalMonitor.Value, (double)value))
+            if (DxvaMonFn.SetPhysicalMonitorBrightness(physicalMonitor.Value, (double)value))
             {
                 physicalMonitor = this.PhysicalMonitor;
                 DxvaMonFn.SaveCurrentMonitorSettings(physicalMonitor.Value);
                 RicInfoScreenHolder.RememberBrightness(this, value);
+                return true;
             }
+
+            return false;
         }
 
         public int GetContrast()
@@ -103,17 +108,20 @@ namespace MonitorLightnt
             return value;
         }
 
-        public void SetContrast(byte value)
+        public bool SetContrast(byte value)
         {
             DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor;
 
             physicalMonitor = this.PhysicalMonitor;
-            if (!DxvaMonFn.SetPhysicalMonitorContrast(physicalMonitor.Value, (double)value))
+            if (DxvaMonFn.SetPhysicalMonitorContrast(physicalMonitor.Value, (double)value))
             {
                 physicalMonitor = this.PhysicalMonitor;
                 DxvaMonFn.SaveCurrentMonitorSettings(physicalMonitor.Value);
                 RicInfoScreenHolder.RememberContrast(this, value);
+                return true;
             }
+
+            return false;
         }
 
         public static List<RichInfoScreen> Get_RichInfo_Screen()
@@ -153,16 +161,18 @@ namespace MonitorLightnt
                     PhysicalMonitors = physicalMonitorArray,
                     WMIMonitorID = wmiMonitorId2,
                     TooltipText = wmiMonitorId2.UserFriendlyName
-                }); ;
+                }); 
             }
-            if (wmiMonitorId2List.Count<wmiMonFn.WMIMonitorID2>() > 0)
-            {
-                List<RichInfoScreen> list = wmiMonitorId2List.Select<wmiMonFn.WMIMonitorID2, RichInfoScreen>((Func<wmiMonFn.WMIMonitorID2, RichInfoScreen>)(remWmi => new RichInfoScreen()
-                {
-                    WMIMonitorID = remWmi
-                })).ToList<RichInfoScreen>();
-                richInfoScreenList.InsertRange(0, (IEnumerable<RichInfoScreen>)list);
-            }
+            // If the screen is not in windows then ignore it
+            //if (wmiMonitorId2List.Count<wmiMonFn.WMIMonitorID2>() > 0)
+            //{
+            //    List<RichInfoScreen> list = wmiMonitorId2List.Select<wmiMonFn.WMIMonitorID2, RichInfoScreen>((Func<wmiMonFn.WMIMonitorID2, RichInfoScreen>)(remWmi => new RichInfoScreen()
+            //    {
+            //        WMIMonitorID = remWmi,
+            //        TooltipText = remWmi.UserFriendlyName
+            //    })).ToList<RichInfoScreen>();
+            //    richInfoScreenList.InsertRange(0, (IEnumerable<RichInfoScreen>)list);
+            //}
             return richInfoScreenList;
         }
 

@@ -113,19 +113,7 @@ namespace MonitorLightnt
           DxvaMonFn.PHYSICAL_MONITOR physicalMonitor,
           double brightness)
         {
-            DxvaMonFn.SetMonitorBrightness(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(brightness));
-            Thread.Sleep(60);
-            uint minBrightness = 0;
-            uint currentBrightness = 0;
-            uint maxBrightness = 0;
-            if (!DxvaMonFn.GetMonitorBrightness(physicalMonitor.hPhysicalMonitor, out minBrightness, out currentBrightness, out maxBrightness))
-            {
-                return false;
-            }
-            double num = (double)minBrightness + (double)(maxBrightness - minBrightness) * (brightness / 100.0);
-            if (DxvaMonFn.SetMonitorBrightness(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(num)))
-                return true;
-            return false;
+            return DxvaMonFn.SetMonitorBrightness(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(brightness));
         }
 
         public static int GetPhysicalMonitorContrast(DxvaMonFn.PHYSICAL_MONITOR physicalMonitor)
@@ -142,19 +130,7 @@ namespace MonitorLightnt
           DxvaMonFn.PHYSICAL_MONITOR physicalMonitor,
           double contrast)
         {
-            DxvaMonFn.SetMonitorContrast(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(contrast));
-            Thread.Sleep(60);
-            uint minContrast = 0;
-            uint currentContrast = 0;
-            uint maxContrast = 0;
-            if (!DxvaMonFn.GetMonitorBrightness(physicalMonitor.hPhysicalMonitor, out minContrast, out currentContrast, out maxContrast))
-            {
-                return false;
-            }
-            double num = (double)minContrast + (double)(maxContrast - minContrast) * (contrast / 100.0);
-            if (DxvaMonFn.SetMonitorBrightness(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(num)))
-                return true;
-            return false;
+            return DxvaMonFn.SetMonitorContrast(physicalMonitor.hPhysicalMonitor, Convert.ToUInt32(contrast));
         }
 
         public static bool SaveCurrentMonitorSettings(DxvaMonFn.PHYSICAL_MONITOR physicalMonitor)
