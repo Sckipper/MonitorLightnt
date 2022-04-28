@@ -35,5 +35,5 @@ The project will receive updates in my free time.
 
 Each file has it's own license.
 
-The whole project is GPLv3 (Please see [licence file](/LICENCE.md) for more information).
+The whole project is GPLv3 (Please see [license file](/LICENSE) for more information).
 
