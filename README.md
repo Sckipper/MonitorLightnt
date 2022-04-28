@@ -6,7 +6,7 @@ Developing monitor is a Samsung LC27G55TQWRXEN
 
 
 ## Screenshot ##
-![alt text](https://i.ibb.co/5xtfk2h/Print.png)
+![alt text](https://i.ibb.co/jfcqPqR/MLT.png)
 
 
 ## Requirements ##
