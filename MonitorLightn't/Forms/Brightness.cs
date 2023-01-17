@@ -56,6 +56,8 @@ namespace MonitorLightnt
 
             SetupSlidersForm();
 
+            CheckMonitorCappabilities();
+
             SetupSlidersValues();
 
             SetupTrayIcon();
@@ -92,6 +94,12 @@ namespace MonitorLightnt
             };
 
             OntopTimer.Start();
+        }
+
+        void CheckMonitorCappabilities()
+        {
+            if(!IsMonitorCompatible())
+                MessageBox.Show("Your monitor does not support DDC/CI", "Error");
         }
 
         void SetupSlidersForm()
@@ -325,6 +333,13 @@ namespace MonitorLightnt
             int index = 0;
             ContrastSlider.Invoke((MethodInvoker)(() => index = ScreenComboBox.SelectedIndex));
             return riScreens[index].GetBrightness();
+        }
+
+        bool IsMonitorCompatible()
+        {
+            int index = 0;
+            ContrastSlider.Invoke((MethodInvoker)(() => index = ScreenComboBox.SelectedIndex));
+            return riScreens[index].GetCapabilities();
         }
 
         void SetBrightness(int value)

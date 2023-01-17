@@ -74,6 +74,16 @@ namespace MonitorLightnt
             set => this.TooltipTitle = value;
         }
 
+        public bool GetCapabilities()
+        {
+            DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor = this.PhysicalMonitor;
+            uint value = 1;
+            if (physicalMonitor != null)
+                return DxvaMonFn.GetPhysicalMonitorCapabilities(physicalMonitor.Value);
+
+            return false;
+        }
+
         public int GetBrightness()
         {
             DxvaMonFn.PHYSICAL_MONITOR? physicalMonitor = this.PhysicalMonitor;

@@ -1,13 +1,13 @@
 ﻿/* 
-    The Commons Clause source-available License  (https://commonsclause.com/)
+	The Commons Clause source-available License  (https://commonsclause.com/)
  
-    All Rights Reserved.  blackholeearth (https://github.com/blackholeearth)
-    Intellectual Property.
+	All Rights Reserved.  blackholeearth (https://github.com/blackholeearth)
+	Intellectual Property.
 
-    you are Free To Download And use On your Pc
-    you are Free To View Code and See How its Done.
+	you are Free To Download And use On your Pc
+	you are Free To View Code and See How its Done.
 
-    You Cant Sell This. 
+	You Cant Sell This. 
  */
 
 using System;
@@ -91,12 +91,13 @@ namespace MonitorLightnt
 
         public static bool DestroyAllPhysicalMonitors(DxvaMonFn.PHYSICAL_MONITOR[] PhysicalMonitors) => DxvaMonFn.DestroyPhysicalMonitors(Convert.ToUInt32(PhysicalMonitors.Length), PhysicalMonitors);
 
-        private static uint GetPhysicalMonitorCapabilities(DxvaMonFn.PHYSICAL_MONITOR physicalMonitor)
+        public static bool GetPhysicalMonitorCapabilities(DxvaMonFn.PHYSICAL_MONITOR physicalMonitor)
         {
+            // TODO - iterpret this https://learn.microsoft.com/en-gb/windows/win32/api/highlevelmonitorconfigurationapi/nf-highlevelmonitorconfigurationapi-getmonitorcapabilities?redirectedfrom=MSDN
             uint pdwMonitorCapabilities = 0;
             uint pdwSupportedColorTemperatures = 0;
-            DxvaMonFn.GetMonitorCapabilities(physicalMonitor.hPhysicalMonitor, ref pdwMonitorCapabilities, ref pdwSupportedColorTemperatures);
-            return pdwMonitorCapabilities;
+            bool result = DxvaMonFn.GetMonitorCapabilities(physicalMonitor.hPhysicalMonitor, ref pdwMonitorCapabilities, ref pdwSupportedColorTemperatures);
+            return result;
         }
 
         public static int GetPhysicalMonitorBrightness(DxvaMonFn.PHYSICAL_MONITOR physicalMonitor)

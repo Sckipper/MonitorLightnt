@@ -25,7 +25,7 @@ namespace MonitorLightnt.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-40")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int Brightness {
             get {
                 return ((int)(this["Brightness"]));
